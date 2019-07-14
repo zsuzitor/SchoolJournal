@@ -4,30 +4,31 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SchoolJournal.Data;
 using SchoolJournal.Models;
 
 namespace SchoolJournal.Controllers
 {
     public class HomeController : Controller
     {
+        readonly ApplicationDbContext _db;
+        public HomeController(ApplicationDbContext db)
+        {
+            _db = db;
+        }
         public IActionResult Index()
         {
             return View();
         }
-
-        public IActionResult About()
+        [Route("api/[controller]/index")]
+        public int IndexApi()
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
+            //ViewData["Message"] = "Your application description page.";
+            var db = _db;
+            return 1;//View();
         }
 
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
+       
 
         public IActionResult Privacy()
         {

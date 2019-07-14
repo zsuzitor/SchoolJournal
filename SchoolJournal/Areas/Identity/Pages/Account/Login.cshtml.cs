@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using SchoolJournal.Models.Domain;
+using SchoolJournal.Models.Domain.Users;
 
 namespace SchoolJournal.Areas.Identity.Pages.Account
 {

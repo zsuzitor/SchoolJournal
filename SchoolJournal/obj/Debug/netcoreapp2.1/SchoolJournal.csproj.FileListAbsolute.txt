@@ -11,8 +11,6 @@ E:\csharp\SchoolJournal\SchoolJournal\obj\Debug\netcoreapp2.1\SchoolJournal.Asse
 E:\csharp\SchoolJournal\SchoolJournal\obj\Debug\netcoreapp2.1\SchoolJournal.TagHelpers.input.cache
 E:\csharp\SchoolJournal\SchoolJournal\obj\Debug\netcoreapp2.1\SchoolJournal.TagHelpers.output.cache
 E:\csharp\SchoolJournal\SchoolJournal\obj\Debug\netcoreapp2.1\SchoolJournal.RazorCoreGenerate.cache
-E:\csharp\SchoolJournal\SchoolJournal\obj\Debug\netcoreapp2.1\Razor\Views\Home\About.g.cshtml.cs
-E:\csharp\SchoolJournal\SchoolJournal\obj\Debug\netcoreapp2.1\Razor\Views\Home\Contact.g.cshtml.cs
 E:\csharp\SchoolJournal\SchoolJournal\obj\Debug\netcoreapp2.1\Razor\Views\Home\Index.g.cshtml.cs
 E:\csharp\SchoolJournal\SchoolJournal\obj\Debug\netcoreapp2.1\Razor\Views\Home\Privacy.g.cshtml.cs
 E:\csharp\SchoolJournal\SchoolJournal\obj\Debug\netcoreapp2.1\Razor\Views\Shared\Error.g.cshtml.cs
@@ -30,3 +28,10 @@ E:\csharp\SchoolJournal\SchoolJournal\obj\Debug\netcoreapp2.1\SchoolJournal.View
 E:\csharp\SchoolJournal\SchoolJournal\obj\Debug\netcoreapp2.1\SchoolJournal.dll
 E:\csharp\SchoolJournal\SchoolJournal\obj\Debug\netcoreapp2.1\SchoolJournal.pdb
 E:\csharp\SchoolJournal\SchoolJournal\obj\Debug\netcoreapp2.1\SchoolJournal.csproj.CopyComplete
+E:\csharp\SchoolJournal\SchoolJournal\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\Account\Login.g.cshtml.cs
+E:\csharp\SchoolJournal\SchoolJournal\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\Account\Register.g.cshtml.cs
+E:\csharp\SchoolJournal\SchoolJournal\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\Account\_ViewImports.g.cshtml.cs
+E:\csharp\SchoolJournal\SchoolJournal\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.g.cshtml.cs
+E:\csharp\SchoolJournal\SchoolJournal\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\_ViewImports.g.cshtml.cs
+E:\csharp\SchoolJournal\SchoolJournal\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\_ViewStart.g.cshtml.cs
+E:\csharp\SchoolJournal\SchoolJournal\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_LoginPartial.g.cshtml.cs
