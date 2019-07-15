@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SchoolJournal.Models.Domain.ManyToMany
 {
-    public class EIDeputyPrincipal: IEIUser
+    public class EIRequestStudent: IEIUser
     {
         public int Id { get; set; }
 
@@ -18,12 +18,17 @@ namespace SchoolJournal.Models.Domain.ManyToMany
 
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
-        
-        public EIDeputyPrincipal()
+
+        public EIRequestStudent()
         {
             DateStart = DateTime.Now;
             DateEnd = null;
         }
 
+        public EIRequestStudent(int educationalInstitutionId, string studentId) : this()
+        {
+            EducationalInstitutionId = educationalInstitutionId;
+            UserId = studentId;
+        }
     }
 }

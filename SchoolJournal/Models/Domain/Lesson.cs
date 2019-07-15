@@ -18,6 +18,8 @@ namespace SchoolJournal.Models.Domain
         public int Num { get; set; }//номер урока по расписанию
         public LessonStatus Status { get; set; }
 
+        public DateTime Date { get; set; }
+
         public string TeacherId { get; set; }
         public ApplicationUser TeacherPlan { get; set; }
 
@@ -31,5 +33,11 @@ namespace SchoolJournal.Models.Domain
 
         //public List<Class> Class { get; set; }
         public List<ClassLesson> ClassLesson { get; set; }
+
+        public Lesson()
+        {
+            StudentsPresence = new List<StudentsPresence>();
+            ClassLesson = new List<ClassLesson>();
+        }
     }
 }

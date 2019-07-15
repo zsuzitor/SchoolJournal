@@ -30,5 +30,11 @@ namespace SchoolJournal.Models.Domain
         //public List<Lesson> Lessons { get; set; }
         public List<ClassLesson> ClassLesson { get; set; }
 
+        public Class()
+        {
+            Students = new List<ApplicationUser>();
+            ClassLesson = new List<ClassLesson>();
+        }
+
     }
 }

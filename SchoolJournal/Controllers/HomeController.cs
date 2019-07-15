@@ -24,6 +24,8 @@ namespace SchoolJournal.Controllers
         public int IndexApi()
         {
             //ViewData["Message"] = "Your application description page.";
+            
+
             var db = _db;
             return 1;//View();
         }

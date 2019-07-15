@@ -41,6 +41,9 @@ namespace SchoolJournal.Models.Domain.Users
 
         //EITeacher
 
+        //TODO многие ко многим, учебки в которые подал заявления
+        public List<EIRequestStudent> EIRequest { get; set; }
+
         //TODO многие ко многим, учебки в которых студент учится
         public List<EIStudent> EIStudents { get; set; }
 
@@ -79,6 +82,25 @@ namespace SchoolJournal.Models.Domain.Users
         public ApplicationUser()
         {
             //RoleProp = AppUserRole.WhoIam;
+            EIStudents = new List<EIStudent>();
+            EIRequest = new List<EIRequestStudent>();
+            EITeachers = new List<EITeacher>();
+            EIDeputyPrincipals = new List<EIDeputyPrincipal>();
+            EIHeadTeachers = new List<EIHeadTeacher>();
+            LessonsPlan = new List<Lesson>();
+            LessonsFact = new List<Lesson>();
+            MarksRate = new List<Mark>();
+            MarksReceived = new List<Mark>();
+            DisciplineTeacher = new List<DisciplineTeacher>();
+            Presences = new List<StudentsPresence>();
+            VisitBuilding = new List<VisitBuilding>();
+        }
+
+
+
+        public async Task<List<string>> GetRoles(UserManager<ApplicationUser> userManager)
+        {
+            return (await userManager.GetRolesAsync(this)).ToList();
         }
 
 

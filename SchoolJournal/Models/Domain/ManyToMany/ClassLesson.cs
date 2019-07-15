@@ -14,5 +14,11 @@ namespace SchoolJournal.Models.Domain.ManyToMany
         public int LessonId { get; set; }
         public Lesson Lesson { get; set; }
 
+
+        public ClassLesson()
+        {
+
+        }
+
     }
 }

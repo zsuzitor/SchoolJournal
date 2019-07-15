@@ -18,5 +18,10 @@ namespace SchoolJournal.Models.Domain
         public ApplicationUser User { get; set; }
         public DateTime Enter { get; set; }
         public DateTime Exit { get; set; }
+
+        public VisitBuilding()
+        {
+
+        }
     }
 }

@@ -23,6 +23,9 @@ namespace SchoolJournal.Models.Domain
         public int StudentsPresenceId { get; set; }
         public StudentsPresence StudentsPresence { get; set; }
 
+        public Mark()
+        {
 
+        }
     }
 }

@@ -25,7 +25,10 @@ namespace SchoolJournal.Models.Domain
         public int LessonId { get; set; }
         public Lesson Lesson { get; set; }
 
-       
+        public StudentsPresence()
+        {
+
+        }
 
     }
 }

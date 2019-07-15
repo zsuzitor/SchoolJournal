@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 
 namespace SchoolJournal.Models.Domain.Users
 {
-    public static class ParentApplicationUser
+    public  class ParentApplicationUser
     {
+        ApplicationUser User { get; set; } = null;
+
         public static bool CheckAccess(AppUserRole role)
         {
             if (role != AppUserRole.Parent)
@@ -14,10 +16,15 @@ namespace SchoolJournal.Models.Domain.Users
             return true;
         }
 
-        public static void TestMeth(this ApplicationUser user)
+        //public static void TestMeth(this ApplicationUser user)
+        //{
+        //    CheckAccess(user.RoleProp);
+        //    //do something
+        //}
+
+        public ParentApplicationUser(ApplicationUser user)
         {
-            CheckAccess(user.RoleProp);
-            //do something
+            User = user;
         }
     }
 }

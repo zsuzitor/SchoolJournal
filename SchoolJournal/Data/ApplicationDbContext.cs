@@ -14,10 +14,19 @@ namespace SchoolJournal.Data
     {
         public DbSet<Class> Class { get; set; }
         public DbSet<Discipline> Disciplines { get; set; }
+        public DbSet<EducationalInstitution> EducationalInstitutions { get; set; }
         public DbSet<Lesson> Lessons { get; set; }
         public DbSet<Mark> Marks { get; set; }
         public DbSet<StudentsPresence> StudentsPresences { get; set; }
         public DbSet<VisitBuilding> VisitsBuildings { get; set; }
+
+        //many to many
+        public DbSet<ClassLesson> ClassLessons { get; set; }
+        public DbSet<DisciplineTeacher> DisciplineTeachers { get; set; }
+        public DbSet<EIDeputyPrincipal> EIDeputyPrincipals { get; set; }
+        public DbSet<EIHeadTeacher> EIHeadTeachers { get; set; }
+        public DbSet<EIStudent> EIStudents { get; set; }
+        public DbSet<EITeacher> EITeachers { get; set; }
 
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -122,6 +131,13 @@ namespace SchoolJournal.Data
             modelBuilder.Entity<EIStudent>().
              HasOne(x1 => x1.EducationalInstitution).
              WithMany(x1 => x1.Students);
+
+            modelBuilder.Entity<EIRequestStudent>().
+            HasOne(x1 => x1.User).
+            WithMany(x1 => x1.EIRequest);
+            modelBuilder.Entity<EIRequestStudent>().
+             HasOne(x1 => x1.EducationalInstitution).
+             WithMany(x1 => x1.RequestStudents);
 
             modelBuilder.Entity<EITeacher>().
             HasOne(x1 => x1.User).
