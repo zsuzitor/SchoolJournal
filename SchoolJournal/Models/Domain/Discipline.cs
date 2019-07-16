@@ -47,16 +47,7 @@ namespace SchoolJournal.Models.Domain
         }
 
 
-        public  async static Task<List<Discipline>> AddDisciplineToEI(string[] namesDiscipline,ApplicationUser user, ApplicationDbContext db)
-        {
-            List<Discipline> newDiscplines = new List<Discipline>();
-            foreach (var i in namesDiscipline)
-                newDiscplines.Add(new Discipline(i, user.EducationalInstitutionId));
-
-            db.Disciplines.AddRange(newDiscplines);
-            await db.SaveChangesAsync();
-            return newDiscplines;
-        }
+       
 
 
         public async Task SetNotActual( ApplicationDbContext db)

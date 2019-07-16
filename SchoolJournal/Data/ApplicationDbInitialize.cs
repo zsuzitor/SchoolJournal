@@ -16,8 +16,10 @@ namespace SchoolJournal.Data
             {
                 await roleManager.CreateAsync(new IdentityRole(roleName.ToString()));
             }
-            userManager.CreateAsync();
-                await db.SaveChangesAsync();
+            var user = new ApplicationUser { UserName = "Admin@mail.ru", Email = "Admin@mail.ru" };
+            var result = await userManager.CreateAsync(user, "Admin1!");
+            await userManager.AddToRoleAsync(user,AppUserRole.Admin.ToString());
+
         }
 
     }

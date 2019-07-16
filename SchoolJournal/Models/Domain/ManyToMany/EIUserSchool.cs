@@ -44,12 +44,13 @@ namespace SchoolJournal.Models.Domain.ManyToMany
             DateEnd = null;
         }
 
-        public EIUser(int EIId, string userId)// : base(EIId, userId)
+        public EIUser(int EIId, string userId, AppUserRole role)// : base(EIId, userId)
         {
             DateStart = DateTime.Now;
             DateEnd = null;
             UserId = userId;
             EducationalInstitutionId = EIId;
+            Role = role;
         }
     }
 }

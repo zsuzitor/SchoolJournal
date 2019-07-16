@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using SchoolJournal.Data;
 using SchoolJournal.Models.Domain.ManyToMany;
 using System;
 using System.Collections.Generic;
@@ -32,6 +34,9 @@ namespace SchoolJournal.Models.Domain.Users
         public int? ClassId { get; set; }
         public Class Class { get; set; }
 
+        //поле не нужно тк есть роль
+        // public bool Admin { get; set; }
+
         ////если пользователь директор
         //public int EducationalInstitutionId { get; set; }
         //public EducationalInstitution EducationalInstitution { get; set; }//EI
@@ -56,7 +61,7 @@ namespace SchoolJournal.Models.Domain.Users
         ////TODO многие ко многим, учебки в которых завуч
         //public List<EIHeadTeacher> EIHeadTeachers { get; set; }
 
-            //данные о всех должностях и переходах
+        //данные о всех должностях и переходах
         public List<EIUser> EIUsers { get; set; }
 
         //уроки учителя планируемые
@@ -106,6 +111,12 @@ namespace SchoolJournal.Models.Domain.Users
         {
             return (await userManager.GetRolesAsync(this)).ToList();
         }
+
+        public async static Task<List<AppUserRole>> GetRolesEI(string userId, ApplicationDbContext db)
+        {
+            return await db.EIUsers.Where(x1 => x1.UserId == userId && x1.DateEnd == null).Select(x1 => x1.Role).ToListAsync();
+        }
+
 
 
     }

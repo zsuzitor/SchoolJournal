@@ -28,7 +28,7 @@ namespace SchoolJournal.Data
         //public DbSet<EIStudent> EIStudents { get; set; }
         //public DbSet<EITeacher> EITeachers { get; set; }
 
-        public DbSet<EIUser> EIUserSchools { get; set; }
+        public DbSet<EIUser> EIUsers { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
                : base(options)
