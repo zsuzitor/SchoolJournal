@@ -23,11 +23,12 @@ namespace SchoolJournal.Data
         //many to many
         public DbSet<ClassLesson> ClassLessons { get; set; }
         public DbSet<DisciplineTeacher> DisciplineTeachers { get; set; }
-        public DbSet<EIDeputyPrincipal> EIDeputyPrincipals { get; set; }
-        public DbSet<EIHeadTeacher> EIHeadTeachers { get; set; }
-        public DbSet<EIStudent> EIStudents { get; set; }
-        public DbSet<EITeacher> EITeachers { get; set; }
+        //public DbSet<EIDeputyPrincipal> EIDeputyPrincipals { get; set; }
+        //public DbSet<EIHeadTeacher> EIHeadTeachers { get; set; }
+        //public DbSet<EIStudent> EIStudents { get; set; }
+        //public DbSet<EITeacher> EITeachers { get; set; }
 
+        public DbSet<EIUser> EIUserSchools { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
                : base(options)
@@ -43,13 +44,13 @@ namespace SchoolJournal.Data
 
 
 
-            modelBuilder.Entity<ApplicationUser>().
-                HasOne(x1 => x1.ClassroomTeacher).
-                WithOne(x1 => x1.ClassroomTeacher);//.OnDelete(DeleteBehavior.SetNull)
+            //modelBuilder.Entity<ApplicationUser>().
+            //    HasOne(x1 => x1.ClassroomTeacher).
+            //    WithOne(x1 => x1.ClassroomTeacher);//.OnDelete(DeleteBehavior.SetNull)
 
-            modelBuilder.Entity<ApplicationUser>().
-                HasOne(x1 => x1.ClassHeadman).
-                WithOne(x1 => x1.Headman);
+            //modelBuilder.Entity<ApplicationUser>().
+            //    HasOne(x1 => x1.ClassHeadman).
+            //    WithOne(x1 => x1.Headman);
 
             modelBuilder.Entity<ApplicationUser>().
                 HasOne(x1 => x1.Class).
@@ -117,50 +118,56 @@ namespace SchoolJournal.Data
 
 
             //связи с EducationalInstitution
-            modelBuilder.Entity<EducationalInstitution>().
-             HasOne(x1 => x1.Schoolmaster).
-             WithOne(x1 => x1.EducationalInstitution);
+            //modelBuilder.Entity<EducationalInstitution>().
+            // HasOne(x1 => x1.Schoolmaster).
+            // WithOne(x1 => x1.EducationalInstitution);
 
             modelBuilder.Entity<EducationalInstitution>().
             HasMany(x1 => x1.Disciplines).
             WithOne(x1 => x1.EducationalInstitution);
 
-            modelBuilder.Entity<EIStudent>().
-             HasOne(x1 => x1.User).
-             WithMany(x1 => x1.EIStudents);
-            modelBuilder.Entity<EIStudent>().
-             HasOne(x1 => x1.EducationalInstitution).
-             WithMany(x1 => x1.Students);
+            //modelBuilder.Entity<EIStudent>().
+            // HasOne(x1 => x1.User).
+            // WithMany(x1 => x1.EIStudents);
+            //modelBuilder.Entity<EIStudent>().
+            // HasOne(x1 => x1.EducationalInstitution).
+            // WithMany(x1 => x1.Students);
 
-            modelBuilder.Entity<EIRequestStudent>().
-            HasOne(x1 => x1.User).
-            WithMany(x1 => x1.EIRequest);
-            modelBuilder.Entity<EIRequestStudent>().
-             HasOne(x1 => x1.EducationalInstitution).
-             WithMany(x1 => x1.RequestStudents);
+            //modelBuilder.Entity<EIRequestStudent>().
+            //HasOne(x1 => x1.User).
+            //WithMany(x1 => x1.EIRequest);
+            //modelBuilder.Entity<EIRequestStudent>().
+            // HasOne(x1 => x1.EducationalInstitution).
+            // WithMany(x1 => x1.RequestStudents);
 
-            modelBuilder.Entity<EITeacher>().
-            HasOne(x1 => x1.User).
-            WithMany(x1 => x1.EITeachers);
-            modelBuilder.Entity<EITeacher>().
-             HasOne(x1 => x1.EducationalInstitution).
-             WithMany(x1 => x1.Teachers);
+            //modelBuilder.Entity<EITeacher>().
+            //HasOne(x1 => x1.User).
+            //WithMany(x1 => x1.EITeachers);
+            //modelBuilder.Entity<EITeacher>().
+            // HasOne(x1 => x1.EducationalInstitution).
+            // WithMany(x1 => x1.Teachers);
 
-            modelBuilder.Entity<EIHeadTeacher>().
+           // modelBuilder.Entity<EIHeadTeacher>().
+           //HasOne(x1 => x1.User).
+           //WithMany(x1 => x1.EIHeadTeachers);
+           // modelBuilder.Entity<EIHeadTeacher>().
+           //  HasOne(x1 => x1.EducationalInstitution).
+           //  WithMany(x1 => x1.HeadTeachers);
+
+           // modelBuilder.Entity<EIDeputyPrincipal>().
+           //HasOne(x1 => x1.User).
+           //WithMany(x1 => x1.EIDeputyPrincipals);
+           // modelBuilder.Entity<EIDeputyPrincipal>().
+           //  HasOne(x1 => x1.EducationalInstitution).
+           //  WithMany(x1 => x1.DeputyPrincipals);
+
+
+            modelBuilder.Entity<EIUser>().
            HasOne(x1 => x1.User).
-           WithMany(x1 => x1.EIHeadTeachers);
-            modelBuilder.Entity<EIHeadTeacher>().
+           WithMany(x1 => x1.EIUsers);
+            modelBuilder.Entity<EIUser>().
              HasOne(x1 => x1.EducationalInstitution).
-             WithMany(x1 => x1.HeadTeachers);
-
-            modelBuilder.Entity<EIDeputyPrincipal>().
-           HasOne(x1 => x1.User).
-           WithMany(x1 => x1.EIDeputyPrincipals);
-            modelBuilder.Entity<EIDeputyPrincipal>().
-             HasOne(x1 => x1.EducationalInstitution).
-             WithMany(x1 => x1.DeputyPrincipals);
-
-
+             WithMany(x1 => x1.EIUsers);
 
             //---
 

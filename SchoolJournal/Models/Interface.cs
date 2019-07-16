@@ -11,19 +11,35 @@ namespace SchoolJournal.Models
     {
     }
 
+    //public interface IEIUser
+    //{
 
+    //}
 
-    public interface IEIUser
-    {
-         int Id { get; set; }
+    //public class EIUser
+    //{
+    //     public int Id { get; set; }
 
-         DateTime DateStart { get; set; }
-         DateTime? DateEnd { get; set; }
+    //    public DateTime DateStart { get; set; }
+    //    public DateTime? DateEnd { get; set; }
 
-         int EducationalInstitutionId { get; set; }
-         EducationalInstitution EducationalInstitution { get; set; }
+    //    public int EducationalInstitutionId { get; set; }
+    //    public EducationalInstitution EducationalInstitution { get; set; }
 
-         string UserId { get; set; }
-         ApplicationUser User { get; set; }
-    }
+    //    public string UserId { get; set; }
+    //    public ApplicationUser User { get; set; }
+
+    //    public EIUser()
+    //    {
+    //        DateStart = DateTime.Now;
+    //        DateEnd = null;
+    //    }
+    //    public EIUser(int EIId,string userId)
+    //    {
+    //        DateStart = DateTime.Now;
+    //        DateEnd = null;
+    //        UserId = userId;
+    //        EducationalInstitutionId = EIId;
+    //    }
+    //}
 }

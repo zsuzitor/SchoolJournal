@@ -15,47 +15,49 @@ namespace SchoolJournal.Models.Domain.Users
         public string Surname { get; set; }
         public string Patronymic { get; set; }
         public DateTime Birthday { get; set; }
-        public bool Male { get; set; }
+        public bool Male { get; set; }//true-мужчина
 
 
         //public AppUserRole RoleProp { get; set; }//тк может и учиться и преподавать, надо использовать роли
 
         //если пользователь классный руководитель
-        public int? ClassroomTeacherId { get; set; }
-        public Class ClassroomTeacher { get; set; }
+        //public int? ClassroomTeacherId { get; set; }
+        //public Class ClassroomTeacher { get; set; }
 
         //пользователь староста
-        public int? ClassHeadmanId { get; set; }
-        public Class ClassHeadman { get; set; }
+        //public int? ClassHeadmanId { get; set; }
+        //public Class ClassHeadman { get; set; }
 
         //класс пользователя
         public int? ClassId { get; set; }
         public Class Class { get; set; }
 
-        //если пользователь директор
-        public int EducationalInstitutionId { get; set; }
-        public EducationalInstitution EducationalInstitution { get; set; }//EI
+        ////если пользователь директор
+        //public int EducationalInstitutionId { get; set; }
+        //public EducationalInstitution EducationalInstitution { get; set; }//EI
 
 
-        //EI-EducationalInstitution 
+        ////EI-EducationalInstitution 
 
-        //EITeacher
+        ////EITeacher
 
-        //TODO многие ко многим, учебки в которые подал заявления
-        public List<EIRequestStudent> EIRequest { get; set; }
+        ////TODO многие ко многим, учебки в которые подал заявления
+        //public List<EIRequestStudent> EIRequest { get; set; }
 
-        //TODO многие ко многим, учебки в которых студент учится
-        public List<EIStudent> EIStudents { get; set; }
+        ////TODO многие ко многим, учебки в которых студент учится
+        //public List<EIStudent> EIStudents { get; set; }
 
-        //TODO многие ко многим, учебки в которых преподает
-        public List<EITeacher> EITeachers { get; set; }
+        ////TODO многие ко многим, учебки в которых преподает
+        //public List<EITeacher> EITeachers { get; set; }
 
-        //TODO многие ко многим, учебки в которых зам директора
-        public List<EIDeputyPrincipal> EIDeputyPrincipals { get; set; }
+        ////TODO многие ко многим, учебки в которых зам директора
+        //public List<EIDeputyPrincipal> EIDeputyPrincipals { get; set; }
 
-        //TODO многие ко многим, учебки в которых завуч
-        public List<EIHeadTeacher> EIHeadTeachers { get; set; }
+        ////TODO многие ко многим, учебки в которых завуч
+        //public List<EIHeadTeacher> EIHeadTeachers { get; set; }
 
+            //данные о всех должностях и переходах
+        public List<EIUser> EIUsers { get; set; }
 
         //уроки учителя планируемые
         public List<Lesson> LessonsPlan { get; set; }
@@ -82,11 +84,11 @@ namespace SchoolJournal.Models.Domain.Users
         public ApplicationUser()
         {
             //RoleProp = AppUserRole.WhoIam;
-            EIStudents = new List<EIStudent>();
-            EIRequest = new List<EIRequestStudent>();
-            EITeachers = new List<EITeacher>();
-            EIDeputyPrincipals = new List<EIDeputyPrincipal>();
-            EIHeadTeachers = new List<EIHeadTeacher>();
+            //EIStudents = new List<EIStudent>();
+            //EIRequest = new List<EIRequestStudent>();
+            //EITeachers = new List<EITeacher>();
+            //EIDeputyPrincipals = new List<EIDeputyPrincipal>();
+            //EIHeadTeachers = new List<EIHeadTeacher>();
             LessonsPlan = new List<Lesson>();
             LessonsFact = new List<Lesson>();
             MarksRate = new List<Mark>();
@@ -94,6 +96,8 @@ namespace SchoolJournal.Models.Domain.Users
             DisciplineTeacher = new List<DisciplineTeacher>();
             Presences = new List<StudentsPresence>();
             VisitBuilding = new List<VisitBuilding>();
+
+            EIUsers = new List<EIUser>();
         }
 
 

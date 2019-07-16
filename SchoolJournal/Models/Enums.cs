@@ -18,8 +18,12 @@ namespace SchoolJournal.Models
         //HeadTeacherApplicationUser
         WhoIam,
         Student,
-        Parent,
+        ClassHeadman,//староста
+        StudentRequested,
+        Parent,//
         Teacher,
+        ClassroomTeacher,//куратор
+        TeacherRequested,
         Schoolmaster,//директор
         Admin,
         DeputyPrincipal,//заместитель директора
