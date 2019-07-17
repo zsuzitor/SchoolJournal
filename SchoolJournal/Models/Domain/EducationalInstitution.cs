@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using SchoolJournal.Data;
 using SchoolJournal.Models.Domain.ManyToMany;
 using SchoolJournal.Models.Domain.Users;
@@ -34,6 +35,8 @@ namespace SchoolJournal.Models.Domain
         //данные о всех должностях и переходах//актуально только если учебка-школа
         public List<EIUser> EIUsers { get; set; }
 
+
+        public List<Class> Class { get; set; }
 
         public EducationalInstitution()
         {
@@ -105,9 +108,9 @@ namespace SchoolJournal.Models.Domain
             return await this.GetOnRole(AppUserRole.Teacher, db);
         }
 
-        public async Task<EIUser> UserInActualTeachers(string studentId, ApplicationDbContext db)
+        public async Task<EIUser> UserInActualTeachers(string teacherId, ApplicationDbContext db)
         {
-            return await UserInActualOnRole(studentId, AppUserRole.Teacher, db);
+            return await UserInActualOnRole(teacherId, AppUserRole.Teacher, db);
         }
 
         public async Task<List<EIUser>> GetActualDeputyPrincipals(ApplicationDbContext db)
@@ -125,6 +128,81 @@ namespace SchoolJournal.Models.Domain
             db.Disciplines.AddRange(newDiscplines);
             await db.SaveChangesAsync();
             return newDiscplines;
+        }
+
+        public async  Task<bool?> AddUserToEI( string userId, AppUserRole oldRole, AppUserRole newRole, ApplicationDbContext db, UserManager<ApplicationUser> userManager)
+        {
+            if (newRole == AppUserRole.Admin || oldRole == AppUserRole.Admin)
+                return null;
+
+            EIUser containsInUser = await this.UserInActualOnRole(userId, newRole, db);
+            EIUser containsInRequest = await this.UserInActualOnRole(userId, oldRole, db);
+
+
+            if (containsInUser == null && containsInRequest != null)
+            {
+                ApplicationUser user = await db.Users.FirstOrDefaultAsync(x1 => x1.Id == userId);
+
+                using (var tranzaction = await db.Database.BeginTransactionAsync())
+                    try
+                    {
+                        db.EIUsers.Add(new EIUser(this.Id, userId, newRole));
+                        containsInRequest.DateEnd = DateTime.Now;
+
+                        await db.SaveChangesAsync();
+
+                        //TODO не понятно что произойдет если роль уже есть, возможно надо это проверять
+                        //не обрабатываются некоторые роли типа: TeacherRequested и тд
+                        var rolesEI = await ApplicationUser.GetRolesEI(user.Id, db);
+                        if (rolesEI.Count(x1 => x1 == oldRole) == 1)
+                            await userManager.RemoveFromRoleAsync(user, oldRole.ToString());
+
+                        await userManager.AddToRoleAsync(user, newRole.ToString());
+
+                        tranzaction.Commit();
+                        return true;
+                    }
+                    catch (Exception)
+                    {
+                        tranzaction.Rollback();
+                        return null;
+                    }
+            }
+            return false;
+
+        }
+
+        public async Task<bool?> RemoveUserFromEI( string userId, AppUserRole oldRole, ApplicationDbContext db, UserManager<ApplicationUser> userManager)
+        {
+            if (oldRole == AppUserRole.Admin)
+                return null;
+            //
+            EIUser containsInUser = await this.UserInActualOnRole(userId, oldRole, db);
+
+            if (containsInUser != null)
+            {
+                ApplicationUser user = await db.Users.FirstOrDefaultAsync(x1 => x1.Id == userId);
+
+                containsInUser.DateEnd = DateTime.Now;
+                await db.SaveChangesAsync();
+                //TODO надо проверять нужно ли удалять роль
+                var rolesEI = await ApplicationUser.GetRolesEI(user.Id, db);
+                if (rolesEI.Count(x1 => x1 == oldRole) == 1)
+                    await userManager.RemoveFromRoleAsync(user, oldRole.ToString());
+
+                return true;
+            }
+
+            return false;
+        }
+
+
+        public async Task<Class> CreateClass(string name, int number, ApplicationDbContext db)
+        {
+            Class res = new Domain.Class(name, number,this.Id);
+            db.Class.Add(res);
+            await db.SaveChangesAsync();
+            return res;
         }
 
 

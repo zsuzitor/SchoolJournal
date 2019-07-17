@@ -83,46 +83,12 @@ namespace SchoolJournal.Models.Domain.Users
         //обавить в список студентов
         public async static Task<bool?> AddUserToEI(string schoolmasterId, string userId, AppUserRole oldRole, AppUserRole newRole, ApplicationDbContext db, UserManager<ApplicationUser> userManager)
         {
-            if (newRole == AppUserRole.Admin || oldRole == AppUserRole.Admin)
-                return null;
+
             EducationalInstitution ei = await SchoolmasterApplicationUser.GetEISchoolmaster(schoolmasterId, db);
             if (ei == null)
                 return null;
             //
-            EIUser containsInUser = await ei.UserInActualOnRole(userId, newRole, db);
-            EIUser containsInRequest = await ei.UserInActualOnRole(userId, oldRole, db);
-
-
-            if (containsInUser == null && containsInRequest != null)
-            {
-                ApplicationUser user = await db.Users.FirstOrDefaultAsync(x1 => x1.Id == userId);
-
-                using (var tranzaction = await db.Database.BeginTransactionAsync())
-                    try
-                    {
-                        db.EIUsers.Add(new EIUser(ei.Id, userId, newRole));
-                        containsInRequest.DateEnd = DateTime.Now;
-
-                        await db.SaveChangesAsync();
-
-                        //TODO не понятно что произойдет если роль уже есть, возможно надо это проверять
-                        //не обрабатываются некоторые роли типа: TeacherRequested и тд
-                        var rolesEI = await ApplicationUser.GetRolesEI(user.Id, db);
-                        if (rolesEI.Count(x1 => x1 == oldRole) == 1)
-                            await userManager.RemoveFromRoleAsync(user, oldRole.ToString());
-
-                        await userManager.AddToRoleAsync(user, newRole.ToString());
-
-                        tranzaction.Commit();
-                        return true;
-                    }
-                    catch (Exception)
-                    {
-                        tranzaction.Rollback();
-                        return null;
-                    }
-            }
-            return false;
+            return await ei.AddUserToEI( userId, oldRole, newRole, db, userManager);
         }
 
         public async static Task<bool?> RemoveUserFromEI(string schoolmasterId, string userId, AppUserRole oldRole, ApplicationDbContext db, UserManager<ApplicationUser> userManager)
@@ -130,27 +96,37 @@ namespace SchoolJournal.Models.Domain.Users
             EducationalInstitution ei = await SchoolmasterApplicationUser.GetEISchoolmaster(schoolmasterId, db);
             if (ei == null)
                 return null;
-            if (oldRole == AppUserRole.Admin)
-                return null;
-            //
-            EIUser containsInUser = await ei.UserInActualOnRole(userId, oldRole, db);
+            return await ei.RemoveUserFromEI(userId, oldRole, db, userManager);
 
-            if (containsInUser != null)
-            {
-                ApplicationUser user = await db.Users.FirstOrDefaultAsync(x1 => x1.Id == userId);
-
-                containsInUser.DateEnd = DateTime.Now;
-                await db.SaveChangesAsync();
-                //TODO надо проверять нужно ли удалять роль
-                var rolesEI = await ApplicationUser.GetRolesEI(user.Id, db);
-                if (rolesEI.Count(x1 => x1 == oldRole) == 1)
-                    await userManager.RemoveFromRoleAsync(user, oldRole.ToString());
-
-                return true;
-            }
-
-            return false;
         }
+
+
+        //TODO мб надо вынести в завуча еще его куда нибудь
+        public async static Task<bool?> AddTeacherToDiscipline(int disciplineId, string schoolmasterId, string teacherId, ApplicationDbContext db)
+        {
+            var ei = await SchoolmasterApplicationUser.GetEISchoolmaster(schoolmasterId, db);
+            if (ei == null)
+                return null;
+
+            Discipline discp = await db.Disciplines.FirstOrDefaultAsync(x1 => x1.Id == disciplineId);
+            if (discp == null)
+                return null;
+            return await discp.AddTeacherToDiscipline(ei, teacherId, db);
+
+
+        }
+
+        public async static Task<Class> CreateClass(string schoolmasterId,string name,int number, ApplicationDbContext db)
+        {
+            var ei = await SchoolmasterApplicationUser.GetEISchoolmaster(schoolmasterId, db);
+            if (ei == null)
+                return null;
+            var newClass=await ei.CreateClass(name, number,db);
+            return newClass;
+
+
+        }
+
 
 
     }

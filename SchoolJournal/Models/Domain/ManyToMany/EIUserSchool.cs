@@ -35,8 +35,8 @@ namespace SchoolJournal.Models.Domain.ManyToMany
         public AppUserRole Role { get; set; }
 
         //если пользователю необходима связь с классом(он староста\ученик\куратор и тд)
-        public int? ClassroomTeacherId { get; set; }
-        public Class ClassroomTeacher { get; set; }
+        public int? ClassroomId { get; set; }
+        public Class Classroom{ get; set; }
 
         public EIUser()
         {
@@ -44,13 +44,17 @@ namespace SchoolJournal.Models.Domain.ManyToMany
             DateEnd = null;
         }
 
-        public EIUser(int EIId, string userId, AppUserRole role)// : base(EIId, userId)
+        public EIUser(int EIId, string userId, AppUserRole role) : this()
         {
-            DateStart = DateTime.Now;
-            DateEnd = null;
+            //DateStart = DateTime.Now;
+            //DateEnd = null;
             UserId = userId;
             EducationalInstitutionId = EIId;
             Role = role;
+        }
+        public EIUser(int EIId, string userId, int classroomId, AppUserRole role) : this(EIId, userId, role)
+        {
+            ClassroomId = classroomId;
         }
     }
 }

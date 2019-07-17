@@ -31,8 +31,8 @@ namespace SchoolJournal.Models.Domain.Users
         //public Class ClassHeadman { get; set; }
 
         //класс пользователя
-        public int? ClassId { get; set; }
-        public Class Class { get; set; }
+        //public int? ClassId { get; set; }
+        //public Class Class { get; set; }
 
         //поле не нужно тк есть роль
         // public bool Admin { get; set; }
@@ -106,6 +106,10 @@ namespace SchoolJournal.Models.Domain.Users
         }
 
 
+        public async Task<ApplicationUser> GetById(string userId, ApplicationDbContext db)
+        {
+            return await db.Users.FirstOrDefaultAsync(x1=>x1.Id==userId);
+        }
 
         public async Task<List<string>> GetRoles(UserManager<ApplicationUser> userManager)
         {

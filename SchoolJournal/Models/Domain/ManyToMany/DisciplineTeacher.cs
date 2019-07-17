@@ -23,5 +23,11 @@ namespace SchoolJournal.Models.Domain.ManyToMany
             DateStart = DateTime.Now;
             DateEnd = null;
         }
+
+        public DisciplineTeacher(string teacherId, int disciplineId) :this()
+        {
+            TeacherId = teacherId;
+            DisciplineId = disciplineId;
+        }
     }
 }
