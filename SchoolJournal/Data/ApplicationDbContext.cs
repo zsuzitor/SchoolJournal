@@ -52,9 +52,9 @@ namespace SchoolJournal.Data
             //    HasOne(x1 => x1.ClassHeadman).
             //    WithOne(x1 => x1.Headman);
 
-            modelBuilder.Entity<ApplicationUser>().
-                HasOne(x1 => x1.Class).
-                WithMany(x1 => x1.Students);
+            //modelBuilder.Entity<ApplicationUser>().
+            //    HasOne(x1 => x1.Class).
+            //    WithMany(x1 => x1.Students);
 
             modelBuilder.Entity<ApplicationUser>().
                 HasMany(x1 => x1.LessonsPlan).
@@ -79,10 +79,10 @@ namespace SchoolJournal.Data
             //TODO user--public List<Discipline> Disciplines { get; set; }
             modelBuilder.Entity<DisciplineTeacher>().
                HasOne(sc => sc.Teacher).
-               WithMany(s => s.DisciplineTeacher);
+               WithMany(s => s.DisciplineTeachers);
             modelBuilder.Entity<DisciplineTeacher>().
                HasOne(sc => sc.Discipline).
-               WithMany(s => s.DisciplineTeacher);
+               WithMany(s => s.DisciplineTeachers);
 
             modelBuilder.Entity<ApplicationUser>().
                HasMany(x1 => x1.Presences).
@@ -96,6 +96,7 @@ namespace SchoolJournal.Data
             modelBuilder.Entity<ClassLesson>().
                 HasOne(sc => sc.Class).
                 WithMany(s => s.ClassLesson);
+                //.OnDelete(DeleteBehavior.);
             modelBuilder.Entity<ClassLesson>().
                HasOne(sc => sc.Lesson).
                WithMany(s => s.ClassLesson);

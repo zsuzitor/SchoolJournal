@@ -15,7 +15,7 @@ namespace SchoolJournal.Models.Domain.ManyToMany
 
         public string TeacherId { get; set; }
         public ApplicationUser Teacher { get; set; }
-        public int DisciplineId { get; set; }
+        public int? DisciplineId { get; set; }
         public Discipline Discipline { get; set; }
 
         public DisciplineTeacher()

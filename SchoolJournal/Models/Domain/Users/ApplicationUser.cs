@@ -77,7 +77,7 @@ namespace SchoolJournal.Models.Domain.Users
 
         //пользователь преподаватель и преподает эти дисциплины
         //public List<Discipline> Disciplines { get; set; }
-        public List<DisciplineTeacher> DisciplineTeacher { get; set; }
+        public List<DisciplineTeacher> DisciplineTeachers { get; set; }
 
 
         //пользователь студент и это его оценки
@@ -98,7 +98,7 @@ namespace SchoolJournal.Models.Domain.Users
             LessonsFact = new List<Lesson>();
             MarksRate = new List<Mark>();
             MarksReceived = new List<Mark>();
-            DisciplineTeacher = new List<DisciplineTeacher>();
+            DisciplineTeachers = new List<DisciplineTeacher>();
             Presences = new List<StudentsPresence>();
             VisitBuilding = new List<VisitBuilding>();
 

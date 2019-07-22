@@ -125,7 +125,7 @@ namespace SchoolJournal.Models.Domain
             //return true;
         }
 
-        
+
 
         public async Task<bool> AddStudent(string studentId, ApplicationDbContext db)
         {

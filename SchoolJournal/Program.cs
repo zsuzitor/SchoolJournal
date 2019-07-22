@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SchoolJournal.Data;
+using SchoolJournal.Models.Domain.Users;
 
 namespace SchoolJournal
 {
@@ -28,7 +29,8 @@ namespace SchoolJournal
                 {
                     var context = services.GetRequiredService<ApplicationDbContext>();
                     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-                    ApplicationDbInitialize.Initialize(context, roleManager);
+                    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+                    ApplicationDbInitialize.Initialize(context, roleManager, userManager);
                 }
                 catch (Exception ex)
                 {

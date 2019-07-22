@@ -14,7 +14,7 @@ namespace SchoolJournal.Models.Domain.ManyToMany
         public DateTime DateStart { get; set; }
         public DateTime? DateEnd { get; set; }
 
-        public int EducationalInstitutionId { get; set; }
+        public int? EducationalInstitutionId { get; set; }
         public EducationalInstitution EducationalInstitution { get; set; }
 
         public string UserId { get; set; }
